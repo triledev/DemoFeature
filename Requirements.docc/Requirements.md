@@ -1,9 +1,9 @@
 # ``Requirements``
 
-## Story
-As a user
-I want the app to load the feed
-So I can see the feed
+## Narrative #1
+As an online customer  
+I want the app to automatically load my latest image feed  
+So I can always enjoy the newest images of my friends  
 
 ## Acceptance criteria
 Given a user
