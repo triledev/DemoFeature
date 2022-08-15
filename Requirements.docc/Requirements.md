@@ -18,12 +18,12 @@ So I can always enjoy images of my friends
 
 ### Scenarios (Acceptance criteria)
 Given the customer doesn't have connectivity  
-When the customer request to see the feed  
-Then the app should display the latest feed saved  
+__When__ the customer request __to__ see the feed  
+__Then__ the app should display the latest feed saved  
 
 Given the customer desn't have connectivity  
-And the cache is empty  
-When the customer request to see the feed  
-Then the app should display an error message  
+__And__ the cache __is__ empty  
+__When__ the customer request __to__ see the feed  
+__Then__ the app should display an __error__ message  
 
 
