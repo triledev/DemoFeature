@@ -7,13 +7,50 @@
 
 import Foundation
 
-class ApiClient {
-    private static let instance = ApiClient()
-    
-    static func getInstance()
-    private init() {}
+// Main Module
+
+extension ApiClient {
+    func login(completion: (LoggedInUser) -> Void) {}
 }
 
-let client = ApiClient()
+extension ApiClient {
+    func loadFeed(completion: ([FeedItem]) -> Void) {}
+}
 
+// Api Module
 
+class ApiClient {
+    static let shared = ApiClient()
+
+    func execute(_ : URLRequest, completion: (Data) -> Void) {}
+}
+
+class MockApiClient: ApiClient {}
+
+// Login Module
+
+struct LoggedInUser {}
+
+class LoginViewModel {
+    var login: (((LoggedInUser) -> Void) -> Void)?
+
+    func didTapLoginButton() {
+        login? { user in
+            // show next screen
+        }
+    }
+}
+
+// Feed Module
+
+struct FeedItem {}
+
+class FeedViewModel {
+    var loadFeed: (((LoggedInUser) -> Void) -> Void)?
+
+    func load() {
+        loadFeed? { loadedItems in
+            // update UI
+        }
+    }
+}
