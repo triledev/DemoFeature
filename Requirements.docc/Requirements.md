@@ -62,3 +62,14 @@ __Then__ the app should display an __error__ message
 ### No cache course (sad path):
 1. System delivers no feed items.
 
+## Save Feed Items
+
+### Data:
+- Feed items
+
+### Primary course (happy path):
+1. Execute "Save Feed Items" command with above data.  
+2. System encodes feed items.  
+3. System timestamps the new cache.  
+4. System replaces the cache with new data.  
+5. System delivers success message.  
