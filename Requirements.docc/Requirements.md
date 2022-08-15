@@ -26,7 +26,7 @@ __And__ the cache __is__ empty
 __When__ the customer request __to__ see the feed  
 __Then__ the app should display an __error__ message  
 
-===
+---
 
 # Use Cases
 
