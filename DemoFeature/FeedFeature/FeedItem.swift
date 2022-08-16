@@ -9,7 +9,7 @@ import Foundation
 
 public struct FeedItem: Equatable {
     let pagination: Pagination
-    let data: ItemData
+    let data: [ItemData]
 }
 
 struct Pagination: Equatable {
