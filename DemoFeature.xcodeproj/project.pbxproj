@@ -60,13 +60,12 @@
 		F42F213C28AABA1700B8E521 /* DemoFeature */ = {
 			isa = PBXGroup;
 			children = (
+				F42F215428AB220500B8E521 /* FeedFeature */,
 				F42F214B28AABA7D00B8E521 /* ApiClient.swift */,
 				F42F213D28AABA1700B8E521 /* DemoFeatureApp.swift */,
 				F42F213F28AABA1700B8E521 /* ContentView.swift */,
 				F42F214128AABA1A00B8E521 /* Assets.xcassets */,
 				F42F214328AABA1A00B8E521 /* Preview Content */,
-				F42F214F28AB1B3300B8E521 /* FeedItem.swift */,
-				F42F215128AB1F1500B8E521 /* FeedLoader.swift */,
 			);
 			path = DemoFeature;
 			sourceTree = "<group>";
@@ -77,6 +76,15 @@
 				F42F214428AABA1A00B8E521 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		F42F215428AB220500B8E521 /* FeedFeature */ = {
+			isa = PBXGroup;
+			children = (
+				F42F214F28AB1B3300B8E521 /* FeedItem.swift */,
+				F42F215128AB1F1500B8E521 /* FeedLoader.swift */,
+			);
+			path = FeedFeature;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
