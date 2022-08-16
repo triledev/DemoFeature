@@ -2,40 +2,40 @@
 
 ## Feed Feature Specs
 
-### Story: Customer requests to see their news feed
+### Story: Subscriber requests to see their news feed
 
 ### Narrative #1
 ```
-As an online customer  
+As an online subscriber  
 I want the app to automatically load my latest news feed  
 So I can always stay up to date with current events
 ```
 
 #### Scenarios (Acceptance criteria)
 >
-Given __the__ customer has connectivity  
-When __the__ customer request *to* see __the__ feed  
+Given __the__ subscriber has connectivity  
+When __the__ subscriber request *to* see __the__ feed  
 Then __the__ app should display __the__ latest feed *from* remote  
   And *replace* __the__ cache __with the__ *new* feed
 
 
 ### Narrative #2
 ```
-As an offline customer  
+As an offline subscriber  
 I want the app to show the latest saved version of my news feed  
 So I can always stay up to date with current events
 ```
 
 #### Scenarios (Acceptance criteria)
 >
-Given the customer doesn't have connectivity  
-__When__ the customer request __to__ see the feed  
+Given the subscriber doesn't have connectivity  
+__When__ the subscriber request __to__ see the feed  
 __Then__ the app should display the latest feed saved
 
 >
-Given the customer desn't have connectivity  
+Given the subscriber desn't have connectivity  
 __And__ the cache __is__ empty  
-__When__ the customer request __to__ see the feed  
+__When__ the subscriber request __to__ see the feed  
 __Then__ the app should display an __error__ message
 
 ---
