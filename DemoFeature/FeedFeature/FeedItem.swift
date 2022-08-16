@@ -7,19 +7,19 @@
 
 import Foundation
 
-struct FeedItem {
+public struct FeedItem: Equatable {
     let pagination: Pagination
     let data: ItemData
 }
 
-struct Pagination {
+struct Pagination: Equatable {
     let limit: Int
     let offset: Int
     let count: Int
     let total: Int
 }
 
-struct ItemData {
+struct ItemData: Equatable {
     let author: String
     let title: String
     let description: String
