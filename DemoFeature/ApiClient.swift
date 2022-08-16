@@ -43,7 +43,7 @@ class LoginViewModel {
 
 // Feed Module
 
-struct FeedItem {}
+//struct FeedItem {}
 
 class FeedViewModel {
     var loadFeed: (((LoggedInUser) -> Void) -> Void)?

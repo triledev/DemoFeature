@@ -13,22 +13,21 @@ struct FeedItem {
 }
 
 struct Pagination {
-    let limit
-    let offset
-    let count
-    let total
+    let limit: Int
+    let offset: Int
+    let count: Int
+    let total: Int
 }
 
 struct ItemData {
-    let author
-    let title
-    let description
-    let url
-    let source
-    let image
-    let category
-    let language
-    let country
-    let published_at
+    let author: String
+    let title: String
+    let description: String
+    let url: URL
+    let source: String
+    let image: String
+    let category: String
+    let language: String
+    let country: String
+    let published_at: String
 }
-
