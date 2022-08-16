@@ -2,13 +2,13 @@
 
 ## Image Feed Feature Specs
 
-### Story: Customer requests to see their image feed
+### Story: Customer requests to see their news feed
 
 ### Narrative #1
 ```
 As an online customer  
-I want the app to automatically load my latest image feed  
-So I can always enjoy the newest images of my friends
+I want the app to automatically load my latest news feed  
+So I can always stay up to date with current events
 ```
 
 #### Scenarios (Acceptance criteria)
@@ -22,8 +22,8 @@ Then __the__ app should display __the__ latest feed *from* remote
 ### Narrative #2
 ```
 As an offline customer  
-I want the app to show the latest saved version of my image feed  
-So I can always enjoy images of my friends
+I want the app to show the latest saved version of my news feed  
+So I can always stay up to date with current events
 ```
 
 #### Scenarios (Acceptance criteria)
