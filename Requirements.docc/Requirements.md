@@ -1,6 +1,6 @@
 # ``Feed Loader``
 
-## Image Feed Feature Specs
+## Feed Feature Specs
 
 ### Story: Customer requests to see their news feed
 
