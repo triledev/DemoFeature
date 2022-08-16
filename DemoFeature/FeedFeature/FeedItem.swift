@@ -57,7 +57,7 @@ public struct FeedItem: Equatable {
         description: String?,
         url: URL?,
         source: String?,
-        image: URL?,
+        imageURL: URL?,
         category: String?,
         language: String?,
         country: String?,
@@ -68,7 +68,7 @@ public struct FeedItem: Equatable {
         self.description = description
         self.url = url
         self.source = source
-        self.imageURL = image
+        self.imageURL = imageURL
         self.category = category
         self.language = language
         self.country = country

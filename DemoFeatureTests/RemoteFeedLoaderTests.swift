@@ -81,70 +81,39 @@ class RemoteFeedLoaderTests: XCTestCase {
     func test_load_deliversItemsOn200HTTPResponseWithJSONItems() {
         let (sut, client) = makeSUT()
 
-        let item1 = FeedItem(
+        let item1 = makeItem(
                 author: "Kerry Crowley",
                 title: "Baseball comes full circle as SF Giants honor Buster Posey, the newest Little League coach",
                 description: "The Giants are holding Buster Posey Day at Oracle Park on Saturday ahead of a game against the St. Louis Cardinals.",
                 url: URL(string: "https://www.marinij.com/2022/05/05/baseball-comes-full-circle-as-sf-giants-honor-buster-posey-the-newest-little-league-coach/"),
                 source: "marinij",
-                image: URL(string: "https://www.marinij.com/wp-content/uploads/2022/05/BNG-L-POSEY-1105-2.jpg?w=1400px&strip=all"),
+                imageURL: URL(string: "https://www.marinij.com/wp-content/uploads/2022/05/BNG-L-POSEY-1105-2.jpg?w=1400px&strip=all"),
                 category: "general",
                 language: "en",
                 country: "us",
                 published: "2022-05-05T18:45:32+00:00"
             )
-        let item1JSON = [
-            "author": item1.author,
-            "title": item1.title,
-            "description": item1.description,
-            "url": item1.url?.absoluteString,
-            "source": item1.source,
-            "image": item1.imageURL?.absoluteString,
-            "category": item1.category,
-            "language": item1.language,
-            "country": item1.country,
-            "published_at": item1.published
-        ]
-        
-        let item2 = FeedItem(
+
+        let item2 = makeItem(
                 author: "Sammy Approved",
                 title: "Happy Cinco De Mayo: Five Fast Facts About The Holiday Linked To African American History",
                 description:"There is one part they don't teach you in the history books: How Cinco De Mayo is linked to African American history. Take a look at five fast facts about the holiday and how Africans are tied into it all.",
                 url: URL(string: "https://globalgrind.com/5050249/happy-cinco-de-mayo-five-fast-facts-about-the-holiday-linked-to-african-american-history/"),
                 source: "globalgrind",
-                image: URL(string: "https://globalgrind.com/wp-content/uploads/sites/16/2021/05/1620247208824.jpg?quality=80&strip=all&w=560&crop=0,0,100,320px"),
+                imageURL: URL(string: "https://globalgrind.com/wp-content/uploads/sites/16/2021/05/1620247208824.jpg?quality=80&strip=all&w=560&crop=0,0,100,320px"),
                 category: "general",
                 language: "en",
                 country: "us",
                 published: "2022-05-05T18:43:36+00:00"
             )
-        let item2JSON = [
-            "author": item2.author,
-            "title": item2.title,
-            "description": item2.description,
-            "url": item2.url?.absoluteString,
-            "source": item2.source,
-            "image": item2.imageURL?.absoluteString,
-            "category": item2.category,
-            "language": item2.language,
-            "country": item2.country,
-            "published_at": item2.published
-        ]
 
-        let pagination = Pagination(limit: 25, offset: 0, count: 25, total: 10000)
-        let paginationJSON = [
-            "limit": pagination.limit,
-            "offset": pagination.offset,
-            "count": pagination.count,
-            "total": pagination.total
-        ]
+        let items = [item1.model, item2.model]
 
-        let itemsJSON: [String: Any] = [ "pagination": paginationJSON, "data": [item1JSON, item2JSON] ]
-
-        expect(sut, toCompleteWith: .success([item1, item2]), when: {
-            //            let jsonData = feedJSON.data(using: .utf8)!
-            let jsonData = try! JSONSerialization.data(withJSONObject: itemsJSON)
-            client.complete(withStatusCode: 200, data: jsonData)
+        expect(sut, toCompleteWith: .success(items), when: {
+            // Alternative ways of creating json data
+            // let json = feedJSON.data(using: .utf8)!
+            let json = makeItemJSON([item1.json, item2.json])
+            client.complete(withStatusCode: 200, data: json)
         })
     }
 
@@ -154,6 +123,51 @@ class RemoteFeedLoaderTests: XCTestCase {
         let client = HTTPClientSpy()
         let sut = RemoteFeedLoader(url: url, client: client)
         return (sut, client)
+    }
+
+    private func makeItem(
+        author: String?,
+        title: String?,
+        description: String?,
+        url: URL?,
+        source: String?,
+        imageURL: URL?,
+        category: String?,
+        language: String?,
+        country: String?,
+        published: String?
+    ) -> (model: FeedItem, json: [String: Any]) {
+        let item = FeedItem(author: author, title: title, description: description, url: url, source: source, imageURL: imageURL, category: category, language: language, country: country, published: published)
+        let json = [
+            "author": author,
+            "title": title,
+            "description": description,
+            "url": url?.absoluteString,
+            "source": source,
+            "image": imageURL?.absoluteString,
+            "category": category,
+            "language": language,
+            "country": country,
+            "published_at": published
+        ].reduce(into: [String: Any]()) { (acc, e) in
+            if let value = e.value { acc[e.key] = value }
+        }
+        return (item, json)
+    }
+
+    private func makeItemJSON(_ items: [[String: Any]]) -> Data {
+        let pagination = Pagination(limit: 25, offset: 0, count: 25, total: 10000)
+        let paginationJSON = [
+            "limit": pagination.limit,
+            "offset": pagination.offset,
+            "count": pagination.count,
+            "total": pagination.total
+        ]
+        let json: [String: Any] = [
+            "pagination": paginationJSON,
+            "data": items
+        ]
+        return try! JSONSerialization.data(withJSONObject: json)
     }
 
     private func expect(_ sut: RemoteFeedLoader, toCompleteWith result: RemoteFeedLoader.Result, when action: () -> Void, file: StaticString = #filePath, line: UInt = #line) {
