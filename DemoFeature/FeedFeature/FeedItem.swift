@@ -7,13 +7,13 @@
 
 import Foundation
 
-public struct FeedItem: Equatable {
-    let pagination: Pagination
-    let data: [NewsItem]
+public struct Feed: Equatable {
+    public let pagination: Pagination
+    public let data: [FeedItem]
 
     public init(
         pagination: Pagination,
-        data: [NewsItem]
+        data: [FeedItem]
     ) {
         self.pagination = pagination
         self.data = data
@@ -21,10 +21,10 @@ public struct FeedItem: Equatable {
 }
 
 public struct Pagination: Equatable {
-    let limit: Int
-    let offset: Int
-    let count: Int
-    let total: Int
+    public let limit: Int
+    public let offset: Int
+    public let count: Int
+    public let total: Int
 
     public init(
         limit: Int,
@@ -39,17 +39,17 @@ public struct Pagination: Equatable {
     }
 }
 
-public struct NewsItem: Equatable {
-    let author: String?
-    let title: String?
-    let description: String?
-    let url: URL?
-    let source: String?
-    let image: URL?
-    let category: String?
-    let language: String?
-    let country: String?
-    let published_at: String?
+public struct FeedItem: Equatable {
+    public let author: String?
+    public let title: String?
+    public let description: String?
+    public let url: URL?
+    public let source: String?
+    public let imageURL: URL?
+    public let category: String?
+    public let language: String?
+    public let country: String?
+    public let published: String?
 
     public init(
         author: String?,
@@ -61,17 +61,48 @@ public struct NewsItem: Equatable {
         category: String?,
         language: String?,
         country: String?,
-        published_at: String?
+        published: String?
     ) {
         self.author = author
         self.title = title
         self.description = description
         self.url = url
         self.source = source
-        self.image = image
+        self.imageURL = image
         self.category = category
         self.language = language
         self.country = country
-        self.published_at = published_at
+        self.published = published
+    }
+}
+
+extension Feed: Decodable {
+    private enum CodingKeys: String, CodingKey {
+        case pagination
+        case data
+    }
+}
+
+extension Pagination: Decodable {
+    private enum CodingKeys: String, CodingKey {
+        case limit
+        case offset
+        case count
+        case total
+    }
+}
+
+extension FeedItem: Decodable {
+    private enum CodingKeys: String, CodingKey {
+        case author
+        case title
+        case description
+        case url
+        case source
+        case imageURL = "image"
+        case category
+        case language
+        case country
+        case published = "published_at"
     }
 }

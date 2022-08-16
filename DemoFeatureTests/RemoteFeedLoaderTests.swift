@@ -66,39 +66,76 @@ class RemoteFeedLoaderTests: XCTestCase {
 
     // MARK: - Happy Path
 
-    private func newsItems() -> [NewsItem] {
-        let newsItems = [
-            NewsItem(
-                author: "ICT Business",
-                title: "\u00ab\u0633\u0644\u0643\u062a\u00bb \u062a\u0648\u0642\u0639 \u0627\u062a\u0641\u0627\u0642\u064a\u0629 \u062a\u0639\u0627\u0648\u0646 \u0645\u0639 \u00ab\u0641\u0631\u064a\u0634 \u0625\u0644\u064a\u0643\u062a\u0631\u064a\u0643\u00bb \u0644\u062a\u0632\u0648\u064a\u062f \u0627\u0644\u0639\u0645\u0644\u0627\u0621 \u0628\u0627\u0644\u0623\u062c\u0647\u0632\u0629 \u0627\u0644\u0623\u0643\u062b\u0631 \u0627\u0628\u062a\u0643\u0627\u0631\u0627 - ICT Business Magazine - \u0623\u064a \u0633\u064a \u062a\u064a \u0628\u064a\u0632\u0646\u0633",
-                description: "\u0623\u0639\u0644\u0646\u062a \u0634\u0631\u0643\u0629 \u0633\u0644\u0643\u062a \u0644\u062a\u0643\u0646\u0648\u0644\u0648\u062c\u064a\u0627 \u0627\u0644\u0627\u062a\u0635\u0627\u0644\u0627\u062a \u0648\u0627\u0644\u0645\u0639\u0644\u0648\u0645\u0627\u062a\u060c \u0627\u0644\u0645\u062a\u062e\u0635\u0635\u0629 \u0641\u064a \u0623\u062c\u0647\u0632\u0629 \u0627\u0644\u0645\u062d\u0645\u0648\u0644 \u0648\u0627\u0644\u0625\u0644\u0643\u062a\u0631\u0648\u0646\u064a\u0627\u062a\u060c \u062a\u0648\u0642\u0639\u064a\u0647\u0627 \u0628\u0631",
-                url: "http:\/\/thinakhbarak.local\/articles\/44017193--%D8%B3%D9%84%D9%83%D8%AA-%D8%AA%D9%88%D9%82%D8%B9-%D8%A7%D8%AA%D9%81%D8%A7%D9%82%D9%8A%D8%A9-%D8%AA%D8%B9%D8%A7%D9%88%D9%86-%D9%85%D8%B9-%D9%81%D8%B1%D9%8A%D8%B4",
-                source: "Akhbarak.net",
-                image: "https:\/\/akhbarak.net\/photos\/articles-photos\/2022\/5\/11\/44017193\/44017193-large.jpg?1652257238",
-                category: "general",
-                language: "ar",
-                country: "eg",
-                published_at: "2022-05-11T12:06:20+00:00"),
-            NewsItem(
-                author: nil,
-                title: "\u0622\u0644\u0627\u0641 \u0627\u0644\u0645\u0634\u062c\u0639\u064a\u0646 \u064a\u062a\u062f\u0641\u0642\u0648\u0646 \u0625\u0644\u0649 \u0627\u0644\u062d\u064a \u0627\u0644\u062b\u0642\u0627\u0641\u064a \u0026quot;\u0643\u062a\u0627\u0631\u0627\u0026quot; \u0628\u0627\u0644\u062f\u0648\u062d\u0629 \u0644\u0645\u0634\u0627\u0647\u062f\u0629 \u0026quot;\u0627\u0644\u0643\u0623\u0633 \u0627\u0644\u0623\u0635\u0644\u064a\u0629\u0026quot; \u0644\u0644\u0645\u0648\u0646\u062f\u064a\u0627\u0644",
-                description: "\u062a\u0648\u0627\u0641\u062f \u0645\u0633\u0627\u0621 \u0623\u0645\u0633 \u0627\u0644\u062b\u0644\u0627\u062b\u0627\u0621 \u0627\u0644\u0622\u0644\u0627\u0641 \u0645\u0646 \u0645\u0634\u062c\u0639\u064a \u0643\u0631\u0629 \u0627\u0644\u0642\u062f\u0645 \u0639\u0644\u0649 \u0627\u0644\u062d\u064a \u0627\u0644\u062b\u0642\u0627\u0641\u064a \u0643\u062a\u0627\u0631\u0627 \u0628\u0627\u0644\u0639\u0627\u0635\u0645\u0629 \u0627\u0644\u0642\u0637\u0631\u064a\u0629 \u0627\u0644\u062f\u0648\u062d\u0629\u060c \u0644\u062d\u0636\u0648\u0631 \u0627\u0644\u062d\u0641\u0644 \u0627\u0644\u062e\u062a\u0627\u0645\u064a \u0644\u0644\u0643\u0623\u0633 \u0627\u0644\u0623\u0635\u0644\u064a\u0629 \u0644\u0628\u0637\u0648\u0644\u0629 \u0643\u0623\u0633 \u0627\u0644\u0639\u0627\u0644\u0645\u060c \u0648\u0627\u0644\u0630\u064a \u062c\u0627\u0621 \u0641\u064a \u0623\u0639\u0642\u0627\u0628 \u0627\u0644\u062c\u0648\u0644\u0629 \u0627\u0644\u062a\u0631\u0648\u064a\u062c\u064a\u0629 \u0627\u0644\u062a\u064a \u0628\u062f\u0623\u062a \u0641\u064a",
-                url: "http:\/\/www.elbotola.com\/article\/2022-05-10-23-09-154.html",
-                source: "Elbotola.com",
-                image: nil,
-                category: "general",
-                language: "ar",
-                country: "ma",
-                published_at: "2022-05-11T08:25:27+00:00")
-        ]
-        return newsItems
-    }
-
     func test_load_deliversItemsOn200HTTPResponseWithJSONItems() {
         let (sut, client) = makeSUT()
+
+        let item1 = FeedItem(
+                author: "Kerry Crowley",
+                title: "Baseball comes full circle as SF Giants honor Buster Posey, the newest Little League coach",
+                description: "The Giants are holding \"Buster Posey Day\" at Oracle Park on Saturday ahead of a game against the St. Louis Cardinals.",
+                url: URL(string: "https://www.marinij.com/2022/05/05/baseball-comes-full-circle-as-sf-giants-honor-buster-posey-the-newest-little-league-coach/"),
+                source: "marinij",
+                image: URL(string: "https://www.marinij.com/wp-content/uploads/2022/05/BNG-L-POSEY-1105-2.jpg?w=1400px&strip=all"),
+                category: "general",
+                language: "en",
+                country: "us",
+                published: "2022-05-05T18:45:32+00:00"
+            )
+        let item1JSON = [
+            "author": item1.author,
+            "title": item1.title,
+            "description": item1.description,
+            "url": item1.url?.absoluteString,
+            "source": item1.source,
+            "image": item1.imageURL?.absoluteString,
+            "category": item1.category,
+            "language": item1.language,
+            "country": item1.country,
+            "published_at": item1.published
+        ]
+        
+        let item2 = FeedItem(
+                author: "Sammy Approved",
+                title: "Happy Cinco De Mayo: Five Fast Facts About The Holiday Linked To African American History",
+                description:"There is one part they don't teach you in the history books: How Cinco De Mayo is linked to African American history. Take a look at five fast facts about the holiday and how Africans are tied into it all.",
+                url: URL(string: "https://globalgrind.com/5050249/happy-cinco-de-mayo-five-fast-facts-about-the-holiday-linked-to-african-american-history/"),
+                source: "globalgrind",
+                image: URL(string: "https://globalgrind.com/wp-content/uploads/sites/16/2021/05/1620247208824.jpg?quality=80&strip=all&w=560&crop=0,0,100,320px"),
+                category: "general",
+                language: "en",
+                country: "us",
+                published: "2022-05-05T18:43:36+00:00"
+            )
+        let item2JSON = [
+            "author": item2.author,
+            "title": item2.title,
+            "description": item2.description,
+            "url": item2.url?.absoluteString,
+            "source": item2.source,
+            "image": item2.imageURL?.absoluteString,
+            "category": item2.category,
+            "language": item2.language,
+            "country": item2.country,
+            "published_at": item2.published
+        ]
+
         let pagination = Pagination(limit: 25, offset: 0, count: 25, total: 10000)
-        let data = newsItems()
-        let item = FeedItem(pagination: pagination, data: data)
+        let paginationJSON = [
+            "limit": pagination.limit.description,
+            "offset": pagination.offset.description,
+            "count": pagination.count.description,
+            "total": pagination.total.description
+        ]
+
+//        let itemsJSON = [ "pagination": paginationJSON, "data": [item1JSON, item2JSON] ]
+//        _ = Feed(pagination: pagination, data: [item1, item2])
+
+        expect(sut, toCompleteWith: .success([item1, item2]), when: {
+//            let json = try! JSONSerialization.data(withJSONObject: itemsJSON)
+//            let json = try! JSONSerialization.data(withJSONObject: feedJSON)
+            let jsonData = feedJSON.data(using: .utf8)!
+            client.complete(withStatusCode: 200, data: jsonData)
+        })
     }
 
     // MARK: - Helpers
@@ -141,4 +178,41 @@ class RemoteFeedLoaderTests: XCTestCase {
             messages[index].completion(.success(data, response))
         }
     }
+    
+    let feedJSON = """
+    {
+        \"pagination\":{
+            "limit":25,
+            "offset":0,
+            "count":25,
+            "total":10000
+        },
+        \"data\":[
+            {
+                "author":"Kerry Crowley",
+                "title":"Baseball comes full circle as SF Giants honor Buster Posey, the newest Little League coach",
+                "description":"The Giants are holding \"Buster Posey Day\" at Oracle Park on Saturday ahead of a game against the St. Louis Cardinals.",
+                "url":"https://www.marinij.com/2022/05/05/baseball-comes-full-circle-as-sf-giants-honor-buster-posey-the-newest-little-league-coach/",
+                "source":"marinij",
+                "image":"https://www.marinij.com/wp-content/uploads/2022/05/BNG-L-POSEY-1105-2.jpg?w=1400px&strip=all",
+                "category":"general",
+                "language":"en",
+                "country":"us",
+                "published_at":"2022-05-05T18:45:32+00:00"
+            },
+            {
+                "author":"Sammy Approved",
+                "title":"Happy Cinco De Mayo: Five Fast Facts About The Holiday Linked To African American History",
+                "description":"There is one part they don't teach you in the history books: How Cinco De Mayo is linked to African American history. Take a look at five fast facts about the holiday and how Africans are tied into it all.",
+                "url":"https://globalgrind.com/5050249/happy-cinco-de-mayo-five-fast-facts-about-the-holiday-linked-to-african-american-history/",
+                "source":"globalgrind",
+                "image":"https://globalgrind.com/wp-content/uploads/sites/16/2021/05/1620247208824.jpg?quality=80&strip=all&w=560&crop=0,0,100,320px",
+                "category":"general",
+                "language":"en",
+                "country":"us",
+                "published_at":"2022-05-05T18:43:36+00:00"
+            }
+        ]
+    }
+    """
 }
