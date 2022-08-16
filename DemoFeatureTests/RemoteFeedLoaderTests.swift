@@ -181,13 +181,13 @@ class RemoteFeedLoaderTests: XCTestCase {
     
     let feedJSON = """
     {
-        \"pagination\":{
+        "pagination":{
             "limit":25,
             "offset":0,
             "count":25,
             "total":10000
         },
-        \"data\":[
+        "data":[
             {
                 "author":"Kerry Crowley",
                 "title":"Baseball comes full circle as SF Giants honor Buster Posey, the newest Little League coach",
