@@ -42,13 +42,11 @@ public final class RemoteFeedLoader {
                 do {
                     if response.statusCode == 200 {
                         let decoded = try JSONDecoder().decode(Feed.self, from: data)
-    //                    print(decoded)
                         completion(.success(decoded.data))
                     } else {
                         completion(.failure(.invalidData))
                     }
                 } catch {
-//                    print(error)
                     completion(.failure(.invalidData))
                 }
             case .failure:
