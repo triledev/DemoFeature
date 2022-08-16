@@ -88,69 +88,26 @@ __Then__ the app should display an __error__ message
 
 ---
 
-GET * https://api.ebay.com/buy/feed/v1_beta/item *
+GET * http://api.mediastack.com/v1/news?access_key=YOUR_ACCESS_KEY *
 
 200 RESPONSE
 
 ```
-{
-  "items": [
-    {
-      "acceptedPaymentMethods": "",
-      "additionalImageUrls": "",
-      "availability": {},
-      "availabilityThreshold": 0,
-      "availabilityThresholdType": {},
-      "brand": "",
-      "buyingOptions": "",
-      "category": "",
-      "categoryId": "",
-      "condition": "",
-      "conditionId": "",
-      "deliveryOptions": {},
-      "discountAmount": "",
-      "discountPercentage": "",
-      "energyEfficiencyClass": "",
-      "epid": "",
-      "estimatedAvailableQuantity": 0,
-      "gtin": "",
-      "imageAlteringProhibited": true,
-      "imageUrl": "",
-      "inferredBrand": "",
-      "inferredEpid": "",
-      "inferredGtin": "",
-      "inferredLocalizedAspects": "",
-      "inferredMpn": "",
-      "itemEndDate": "",
-      "itemId": "",
-      "itemLocationCountry": "",
-      "localizedAspects": "",
-      "lotSize": 0,
-      "mpn": "",
-      "originalPriceCurrency": {},
-      "originalPriceValue": "",
-      "priceCurrency": {},
-      "priceValue": "",
-      "primaryItemGroupId": "",
-      "primaryItemGroupType": "",
-      "qualifiedPrograms": "",
-      "refundMethod": {},
-      "returnMethod": {},
-      "returnPeriodUnit": {},
-      "returnPeriodValue": 0,
-      "returnShippingCostPayer": {},
-      "returnsAccepted": true,
-      "sellerFeedbackPercentage": "",
-      "sellerFeedbackScore": "",
-      "sellerItemRevision": "",
-      "sellerTrustLevel": {},
-      "sellerUsername": "",
-      "shipToExcludedRegions": "",
-      "shipToIncludedRegions": "",
-      "title": ""
-    }
-  ]
-}
+// Live News Data
+
+http://api.mediastack.com/v1/news
+    ? access_key = YOUR_ACCESS_KEY
+    
+// optional parameters: 
+
+    & sources = cnn,bbc
+    & categories = business,sports
+    & countries = us,au
+    & languages = en,-de
+    & keywords = virus,-corona
+    & sort = published_desc
+    & offset = 0
+    & limit = 100
 ```
 
 400 RESPONSE
