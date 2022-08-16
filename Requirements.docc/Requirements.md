@@ -92,6 +92,7 @@ GET * https://api.ebay.com/buy/feed/v1_beta/item *
 
 200 RESPONSE
 
+```
 {
   "items": [
     {
@@ -150,6 +151,7 @@ GET * https://api.ebay.com/buy/feed/v1_beta/item *
     }
   ]
 }
+```
 
 400 RESPONSE
 Bad Request
