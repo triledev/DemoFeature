@@ -85,3 +85,80 @@ __Then__ the app should display an __error__ message
 3. System timestamps the new cache.  
 4. System replaces the cache with new data.  
 5. System delivers success message.
+
+---
+
+GET * https://api.ebay.com/buy/feed/v1_beta/item *
+
+200 RESPONSE
+
+{
+  "items": [
+    {
+      "acceptedPaymentMethods": "",
+      "additionalImageUrls": "",
+      "availability": {},
+      "availabilityThreshold": 0,
+      "availabilityThresholdType": {},
+      "brand": "",
+      "buyingOptions": "",
+      "category": "",
+      "categoryId": "",
+      "condition": "",
+      "conditionId": "",
+      "deliveryOptions": {},
+      "discountAmount": "",
+      "discountPercentage": "",
+      "energyEfficiencyClass": "",
+      "epid": "",
+      "estimatedAvailableQuantity": 0,
+      "gtin": "",
+      "imageAlteringProhibited": true,
+      "imageUrl": "",
+      "inferredBrand": "",
+      "inferredEpid": "",
+      "inferredGtin": "",
+      "inferredLocalizedAspects": "",
+      "inferredMpn": "",
+      "itemEndDate": "",
+      "itemId": "",
+      "itemLocationCountry": "",
+      "localizedAspects": "",
+      "lotSize": 0,
+      "mpn": "",
+      "originalPriceCurrency": {},
+      "originalPriceValue": "",
+      "priceCurrency": {},
+      "priceValue": "",
+      "primaryItemGroupId": "",
+      "primaryItemGroupType": "",
+      "qualifiedPrograms": "",
+      "refundMethod": {},
+      "returnMethod": {},
+      "returnPeriodUnit": {},
+      "returnPeriodValue": 0,
+      "returnShippingCostPayer": {},
+      "returnsAccepted": true,
+      "sellerFeedbackPercentage": "",
+      "sellerFeedbackScore": "",
+      "sellerItemRevision": "",
+      "sellerTrustLevel": {},
+      "sellerUsername": "",
+      "shipToExcludedRegions": "",
+      "shipToIncludedRegions": "",
+      "title": ""
+    }
+  ]
+}
+
+400 RESPONSE
+Bad Request
+
+404 RESPONSE
+Not found
+
+416 RESPONSE
+Range not satisfiable
+
+500 RESPONSE
+Internal server error
