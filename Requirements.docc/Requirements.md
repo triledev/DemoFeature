@@ -110,6 +110,10 @@ http://api.mediastack.com/v1/news
 
 ---
 
+### Example API Response:
+
+If your API request has been successful, the mediastack API will return HTTP status 200 together with a JSON result, carrying a pagination object as well as a data object containing one or multiple news articles.
+
 200 RESPONSE
 ```
 {
@@ -434,3 +438,12 @@ Range not satisfiable
 
 500 RESPONSE
 Internal server error
+
+### Example API Response Objects:
+
+| Response Object                      | Description                                                   |
+|--------------------------------------|---------------------------------------------------------------|
+| `pagination > limit`                 | `Returns your pagination limit value.`                        |
+| `pagination > offset`                | `Returns your pagination offset value.`                       |
+| `pagination > count`                 | `Returns the results count on the current page.`              |
+| `pagination > total`                 | `Returns the total count of results available.`               |

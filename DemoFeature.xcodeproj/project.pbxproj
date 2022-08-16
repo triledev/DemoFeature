@@ -13,6 +13,7 @@
 		F42F214528AABA1A00B8E521 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F42F214428AABA1A00B8E521 /* Preview Assets.xcassets */; };
 		F42F214C28AABA7D00B8E521 /* ApiClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = F42F214B28AABA7D00B8E521 /* ApiClient.swift */; };
 		F42F214E28AB054500B8E521 /* Requirements.docc in Sources */ = {isa = PBXBuildFile; fileRef = F42F214D28AB054500B8E521 /* Requirements.docc */; };
+		F42F215028AB1B3300B8E521 /* FeedItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = F42F214F28AB1B3300B8E521 /* FeedItem.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -23,6 +24,7 @@
 		F42F214428AABA1A00B8E521 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		F42F214B28AABA7D00B8E521 /* ApiClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiClient.swift; sourceTree = "<group>"; };
 		F42F214D28AB054500B8E521 /* Requirements.docc */ = {isa = PBXFileReference; lastKnownFileType = folder.documentationcatalog; path = Requirements.docc; sourceTree = "<group>"; };
+		F42F214F28AB1B3300B8E521 /* FeedItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedItem.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -61,6 +63,7 @@
 				F42F213F28AABA1700B8E521 /* ContentView.swift */,
 				F42F214128AABA1A00B8E521 /* Assets.xcassets */,
 				F42F214328AABA1A00B8E521 /* Preview Content */,
+				F42F214F28AB1B3300B8E521 /* FeedItem.swift */,
 			);
 			path = DemoFeature;
 			sourceTree = "<group>";
@@ -146,6 +149,7 @@
 				F42F214E28AB054500B8E521 /* Requirements.docc in Sources */,
 				F42F214028AABA1700B8E521 /* ContentView.swift in Sources */,
 				F42F213E28AABA1700B8E521 /* DemoFeatureApp.swift in Sources */,
+				F42F215028AB1B3300B8E521 /* FeedItem.swift in Sources */,
 				F42F214C28AABA7D00B8E521 /* ApiClient.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
