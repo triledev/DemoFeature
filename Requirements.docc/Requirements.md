@@ -88,7 +88,7 @@ __Then__ the app should display an __error__ message
 
 ---
 
-GET * http://api.mediastack.com/v1/news?access_key=bc6aff46b7ed7e0b2e29c421ffc9fcfd *
+GET * http://api.mediastack.com/v1/news?access_key=bc6aff46b7ed7e0b2e29c421ffc9fcfd&countries=us&languages=en&limit=100 *
 
 ```
 // Live News Data
