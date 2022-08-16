@@ -142,8 +142,8 @@ class RemoteFeedLoaderTests: XCTestCase {
         let itemsJSON: [String: Any] = [ "pagination": paginationJSON, "data": [item1JSON, item2JSON] ]
 
         expect(sut, toCompleteWith: .success([item1, item2]), when: {
+            //            let jsonData = feedJSON.data(using: .utf8)!
             let jsonData = try! JSONSerialization.data(withJSONObject: itemsJSON)
-//            let jsonData = feedJSON.data(using: .utf8)!
             client.complete(withStatusCode: 200, data: jsonData)
         })
     }
