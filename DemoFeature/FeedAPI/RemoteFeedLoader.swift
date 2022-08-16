@@ -30,23 +30,22 @@ public final class RemoteFeedLoader {
         client.get(from: url) { result in
             switch result {
             case let .success(data, response):
-                completion(self.map(data, from: response))
+                completion(RemoteFeedLoader.map(data, from: response))
             case .failure:
                 completion(.failure(.connetivity))
             }
         }
     }
-    
-    private func map(_ data: Data, from response: HTTPURLResponse) -> Result {
-        do {
-            if response.statusCode == 200 {
-                let decoded = try JSONDecoder().decode(Feed.self, from: data)
-                return .success(decoded.data)
-            } else {
-                return .failure(.invalidData)
-            }
-        } catch {
+
+    // MARK: - Helpers
+
+    private static var OK_200 = 200
+    private static func map(_ data: Data, from response: HTTPURLResponse) -> Result {
+        guard response.statusCode == OK_200,
+            let root = try? JSONDecoder().decode(Feed.self, from: data) else {
             return .failure(.invalidData)
         }
+
+        return .success(root.data)
     }
 }
