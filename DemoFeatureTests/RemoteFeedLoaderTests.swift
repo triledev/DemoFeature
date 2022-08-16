@@ -59,7 +59,19 @@ class RemoteFeedLoaderTests: XCTestCase {
     func test_load_deliversNoItemsOn200HTTPResponseWithEmptyJSONList() {
         let (sut, client) = makeSUT()
         expect(sut, toCompleteWith: .success([]), when: {
-            let emptyListJSON = Data(_: "{\"pagination\":{},\"data\":[]}".utf8)
+            let testJSON = """
+            {
+             "pagination":{
+                    "limit":100,
+                    "offset":0,
+                    "count":100,
+                    "total":10000
+                },
+                "data":[]
+            }
+            """
+            let emptyListJSON = Data(_: testJSON.utf8)
+            
             client.complete(withStatusCode: 200, data: emptyListJSON)
         })
     }
@@ -72,7 +84,7 @@ class RemoteFeedLoaderTests: XCTestCase {
         let item1 = FeedItem(
                 author: "Kerry Crowley",
                 title: "Baseball comes full circle as SF Giants honor Buster Posey, the newest Little League coach",
-                description: "The Giants are holding \"Buster Posey Day\" at Oracle Park on Saturday ahead of a game against the St. Louis Cardinals.",
+                description: "The Giants are holding Buster Posey Day at Oracle Park on Saturday ahead of a game against the St. Louis Cardinals.",
                 url: URL(string: "https://www.marinij.com/2022/05/05/baseball-comes-full-circle-as-sf-giants-honor-buster-posey-the-newest-little-league-coach/"),
                 source: "marinij",
                 image: URL(string: "https://www.marinij.com/wp-content/uploads/2022/05/BNG-L-POSEY-1105-2.jpg?w=1400px&strip=all"),
@@ -191,7 +203,7 @@ class RemoteFeedLoaderTests: XCTestCase {
             {
                 "author":"Kerry Crowley",
                 "title":"Baseball comes full circle as SF Giants honor Buster Posey, the newest Little League coach",
-                "description":"The Giants are holding "Buster Posey Day" at Oracle Park on Saturday ahead of a game against the St. Louis Cardinals.",
+                "description":"The Giants are holding Buster Posey Day at Oracle Park on Saturday ahead of a game against the St. Louis Cardinals.",
                 "url":"https://www.marinij.com/2022/05/05/baseball-comes-full-circle-as-sf-giants-honor-buster-posey-the-newest-little-league-coach/",
                 "source":"marinij",
                 "image":"https://www.marinij.com/wp-content/uploads/2022/05/BNG-L-POSEY-1105-2.jpg?w=1400px&strip=all",

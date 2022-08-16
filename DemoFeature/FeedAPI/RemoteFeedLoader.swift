@@ -39,13 +39,22 @@ public final class RemoteFeedLoader {
         client.get(from: url) { result in
             switch result {
             case let .success(data, _):
-                if let decoded = try? JSONDecoder().decode(Feed.self, from: data) {
-                    completion(.success(decoded.data))
+                do {
+                    let decoded = try JSONDecoder().decode(Feed.self, from: data)
                     print(decoded)
-                } else {
+                    completion(.success(decoded.data))
+                } catch {
+                    print(error)
                     completion(.failure(.invalidData))
-                    
                 }
+                
+//                if let decoded = try? JSONDecoder().decode(Feed.self, from: data) {
+//                    completion(.success(decoded.data))
+//                    print(decoded)
+//                } else {
+//                    completion(.failure(.invalidData))
+//
+//                }
             case .failure:
                 completion(.failure(.connetivity))
             }
