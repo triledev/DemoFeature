@@ -108,18 +108,6 @@ http://api.mediastack.com/v1/news
     & limit = 100
 ```
 
-400 RESPONSE
-Bad Request
-
-404 RESPONSE
-Not found
-
-416 RESPONSE
-Range not satisfiable
-
-500 RESPONSE
-Internal server error
-
 ---
 
 200 RESPONSE
@@ -435,3 +423,14 @@ Internal server error
    ]
 }
 ```
+400 RESPONSE
+Bad Request
+
+404 RESPONSE
+Not found
+
+416 RESPONSE
+Range not satisfiable
+
+500 RESPONSE
+Internal server error
