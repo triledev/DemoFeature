@@ -133,19 +133,17 @@ class RemoteFeedLoaderTests: XCTestCase {
 
         let pagination = Pagination(limit: 25, offset: 0, count: 25, total: 10000)
         let paginationJSON = [
-            "limit": pagination.limit.description,
-            "offset": pagination.offset.description,
-            "count": pagination.count.description,
-            "total": pagination.total.description
+            "limit": pagination.limit,
+            "offset": pagination.offset,
+            "count": pagination.count,
+            "total": pagination.total
         ]
 
-//        let itemsJSON = [ "pagination": paginationJSON, "data": [item1JSON, item2JSON] ]
-//        _ = Feed(pagination: pagination, data: [item1, item2])
+        let itemsJSON: [String: Any] = [ "pagination": paginationJSON, "data": [item1JSON, item2JSON] ]
 
         expect(sut, toCompleteWith: .success([item1, item2]), when: {
-//            let json = try! JSONSerialization.data(withJSONObject: itemsJSON)
-//            let json = try! JSONSerialization.data(withJSONObject: feedJSON)
-            let jsonData = feedJSON.data(using: .utf8)!
+            let jsonData = try! JSONSerialization.data(withJSONObject: itemsJSON)
+//            let jsonData = feedJSON.data(using: .utf8)!
             client.complete(withStatusCode: 200, data: jsonData)
         })
     }

@@ -41,10 +41,10 @@ public final class RemoteFeedLoader {
             case let .success(data, _):
                 do {
                     let decoded = try JSONDecoder().decode(Feed.self, from: data)
-                    print(decoded)
+//                    print(decoded)
                     completion(.success(decoded.data))
                 } catch {
-                    print(error)
+//                    print(error)
                     completion(.failure(.invalidData))
                 }
                 
