@@ -47,21 +47,9 @@ public final class RemoteFeedLoader {
 //                    print(error)
                     completion(.failure(.invalidData))
                 }
-                
-//                if let decoded = try? JSONDecoder().decode(Feed.self, from: data) {
-//                    completion(.success(decoded.data))
-//                    print(decoded)
-//                } else {
-//                    completion(.failure(.invalidData))
-//
-//                }
             case .failure:
                 completion(.failure(.connetivity))
             }
         }
     }
 }
-
-//private struct Root: Decodable {
-//    let items: [FeedItem]
-//}
