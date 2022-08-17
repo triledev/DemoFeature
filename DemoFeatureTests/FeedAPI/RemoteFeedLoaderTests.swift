@@ -99,7 +99,7 @@ class RemoteFeedLoaderTests: XCTestCase {
         let items = [item1.model, item2.model]
 
         expect(sut, toCompleteWith: .success(items), when: {
-            // Alternative ways of creating json data
+            // Another way of creating json data
             // let json = feedJSON.data(using: .utf8)!
             let json = makeItemJSON([item1.json, item2.json])
             client.complete(withStatusCode: 200, data: json)
