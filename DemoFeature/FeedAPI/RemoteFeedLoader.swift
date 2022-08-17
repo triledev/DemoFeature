@@ -16,10 +16,7 @@ public final class RemoteFeedLoader {
         case invalidData
     }
 
-    public enum Result: Equatable {
-        case success([FeedItem])
-        case failure(Error)
-    }
+    public typealias Result = LoadFeedResult<Error>
 
     public init(url: URL, client: HTTPClient) {
         self.url = url
@@ -41,10 +38,10 @@ public final class RemoteFeedLoader {
     // MARK: - Helpers
 
     private static var OK_200 = 200
-    private static func map(_ data: Data, from response: HTTPURLResponse) -> Result {
+    private static func map(_ data: Data, from response: HTTPURLResponse) -> RemoteFeedLoader.Result {
         guard response.statusCode == OK_200,
             let root = try? JSONDecoder().decode(Feed.self, from: data) else {
-            return .failure(.invalidData)
+                return .failure(.invalidData)
         }
 
         return .success(root.data)
