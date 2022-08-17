@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		F41BE7BB28AD257800FEB41B /* FeedViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F41BE7BA28AD257800FEB41B /* FeedViewModel.swift */; };
+		F41BE7BD28AD27A700FEB41B /* TestData.swift in Sources */ = {isa = PBXBuildFile; fileRef = F41BE7BC28AD27A700FEB41B /* TestData.swift */; };
 		F42F213E28AABA1700B8E521 /* DemoFeatureApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F42F213D28AABA1700B8E521 /* DemoFeatureApp.swift */; };
 		F42F214028AABA1700B8E521 /* FeedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F42F213F28AABA1700B8E521 /* FeedView.swift */; };
 		F42F214228AABA1A00B8E521 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F42F214128AABA1A00B8E521 /* Assets.xcassets */; };
@@ -34,6 +35,7 @@
 
 /* Begin PBXFileReference section */
 		F41BE7BA28AD257800FEB41B /* FeedViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedViewModel.swift; sourceTree = "<group>"; };
+		F41BE7BC28AD27A700FEB41B /* TestData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestData.swift; sourceTree = "<group>"; };
 		F42F213A28AABA1700B8E521 /* DemoFeature.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DemoFeature.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F42F213D28AABA1700B8E521 /* DemoFeatureApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DemoFeatureApp.swift; sourceTree = "<group>"; };
 		F42F213F28AABA1700B8E521 /* FeedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedView.swift; sourceTree = "<group>"; };
@@ -106,6 +108,7 @@
 			isa = PBXGroup;
 			children = (
 				F42F214428AABA1A00B8E521 /* Preview Assets.xcassets */,
+				F41BE7BC28AD27A700FEB41B /* TestData.swift */,
 			);
 			path = "Preview Content";
 			sourceTree = "<group>";
@@ -246,6 +249,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F41BE7BD28AD27A700FEB41B /* TestData.swift in Sources */,
 				F42F215228AB1F1500B8E521 /* FeedLoader.swift in Sources */,
 				F42F216828AB3AFE00B8E521 /* RemoteFeedLoader.swift in Sources */,
 				F42F214E28AB054500B8E521 /* Requirements.docc in Sources */,
