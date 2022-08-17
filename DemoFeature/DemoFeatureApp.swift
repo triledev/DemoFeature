@@ -11,7 +11,7 @@ import SwiftUI
 struct DemoFeatureApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            FeedView()
         }
     }
 }
