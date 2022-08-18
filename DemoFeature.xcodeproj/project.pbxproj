@@ -100,9 +100,8 @@
 				F41BE7BA28AD257800FEB41B /* FeedViewModel.swift */,
 				F42F214128AABA1A00B8E521 /* Assets.xcassets */,
 				F42F214328AABA1A00B8E521 /* Preview Content */,
-				F42F216628AB3ADE00B8E521 /* FeedAPI */,
 				F42F215428AB220500B8E521 /* FeedFeature */,
-				F41BE7BE28AD28EB00FEB41B /* Story.json */,
+				F42F216628AB3ADE00B8E521 /* FeedAPI */,
 			);
 			path = DemoFeature;
 			sourceTree = "<group>";
@@ -110,6 +109,7 @@
 		F42F214328AABA1A00B8E521 /* Preview Content */ = {
 			isa = PBXGroup;
 			children = (
+				F41BE7BE28AD28EB00FEB41B /* Story.json */,
 				F42F214428AABA1A00B8E521 /* Preview Assets.xcassets */,
 				F41BE7BC28AD27A700FEB41B /* TestData.swift */,
 			);
@@ -145,8 +145,8 @@
 		F4410E2A28AC62A000006224 /* FeedAPI */ = {
 			isa = PBXGroup;
 			children = (
-				F42F216428AB25E700B8E521 /* RemoteFeedLoaderTests.swift */,
 				F4410E2B28AC7D2100006224 /* URLSessionHTTPClientTests.swift */,
+				F42F216428AB25E700B8E521 /* RemoteFeedLoaderTests.swift */,
 			);
 			path = FeedAPI;
 			sourceTree = "<group>";
