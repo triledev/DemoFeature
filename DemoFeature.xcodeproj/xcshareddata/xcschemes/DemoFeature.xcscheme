@@ -50,6 +50,16 @@
                ReferencedContainer = "container:DemoFeature.xcodeproj">
             </BuildableReference>
          </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "F4D3493F28AEF5F9009A4512"
+               BuildableName = "DemoFeatureAPIEndToEndTests.xctest"
+               BlueprintName = "DemoFeatureAPIEndToEndTests"
+               ReferencedContainer = "container:DemoFeature.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
    </TestAction>
    <LaunchAction
