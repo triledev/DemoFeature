@@ -11,7 +11,7 @@ import DemoFeature
 class DemoFeatureAPIEndToEndTests: XCTestCase {
 
     func test_endToEndTestServerGETFeedResult_matchesFixedTestAccountData() {
-        let testServerURL = URL(string: "http://api.mediastack.com/v1/news?access_key=bc6aff46b7ed7e0b2e29c421ffc9fcfd&countries=us&languages=en&limit=8")!
+        let testServerURL = makeTestServerURL()
         let client = URLSessionHTTPClient()
         let loader = RemoteFeedLoader(url: testServerURL, client: client)
 
@@ -26,7 +26,7 @@ class DemoFeatureAPIEndToEndTests: XCTestCase {
 
         switch receivedResult {
         case let .success(items)?:
-            XCTAssertEqual(items.count, 8, "Expected 8 items in the test account feed")
+            XCTAssertEqual(items.count, 5, "Expected 5 items in the test account feed")
 
         case let .failure(error)?:
             XCTFail("Expected successful feed result, got '\(error)' error instead")
@@ -34,5 +34,17 @@ class DemoFeatureAPIEndToEndTests: XCTestCase {
         default:
             XCTFail("Expected successful feed result, got no result instead")
         }
+    }
+
+    // MARK: - Helpers
+
+    private func makeTestServerURL() -> URL {
+        let accessKey = "bc6aff46b7ed7e0b2e29c421ffc9fcfd"
+        let limit = "5"
+        let countries = "us"
+        let languages = "en"
+        let baseURL = "mediastack.com"
+        let testServerURL = URL(string: "http://api.\(baseURL)/v1/news?access_key=\(accessKey)&countries=\(countries)&languages=\(languages)&limit=\(limit)")!
+        return testServerURL
     }
 }
