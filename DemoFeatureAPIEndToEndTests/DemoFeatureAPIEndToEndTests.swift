@@ -12,7 +12,7 @@ class DemoFeatureAPIEndToEndTests: XCTestCase {
 
     func test_endToEndTestServerGETFeedResult_matchesFixedTestAccountData() {
         let count = 5
-        var receivedResult = getFeedResult(count: count)
+        let receivedResult = getFeedResult(count: count)
 
         switch receivedResult {
         case let .success(items)?:
@@ -37,11 +37,14 @@ class DemoFeatureAPIEndToEndTests: XCTestCase {
         let testServerURL = URL(string: "http://api.\(baseURL)/v1/news?access_key=\(accessKey)&countries=\(countries)&languages=\(languages)&limit=\(limit)")!
         return testServerURL
     }
-    
-    private func getFeedResult(count limit: Int) -> LoadFeedResult? {
+
+    private func getFeedResult(count limit: Int, file: StaticString = #filePath, line: UInt = #line) -> LoadFeedResult? {
         let testServerURL = makeTestServerURL(count: limit)
         let client = URLSessionHTTPClient()
         let loader = RemoteFeedLoader(url: testServerURL, client: client)
+
+        trackForMemoryLeak(client, file: file, line: line)
+        trackForMemoryLeak(loader, file: file, line: line)
 
         let exp = expectation(description: "Wait for load completion")
 
