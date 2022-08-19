@@ -26,7 +26,7 @@ class DemoFeatureAPIEndToEndTests: XCTestCase {
 
         switch receivedResult {
         case let .success(items)?:
-            XCTAssertEqual(items.count, 8)
+            XCTAssertEqual(items.count, 8, "Expected 8 items in the test account feed")
 
         case let .failure(error)?:
             XCTFail("Expected successful feed result, got '\(error)' error instead")

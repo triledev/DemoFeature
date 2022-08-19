@@ -87,6 +87,7 @@ __Then__ the app should display an __error__ message
 5. System delivers success message.
 
 ---
+Documentation: https://mediastack.com/documentation
 
 GET * http://api.mediastack.com/v1/news?access_key=YOUR_ACCESS_KEY *
 
