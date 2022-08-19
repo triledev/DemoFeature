@@ -12,18 +12,7 @@ class DemoFeatureAPIEndToEndTests: XCTestCase {
 
     func test_endToEndTestServerGETFeedResult_matchesFixedTestAccountData() {
         let count = 5
-        let testServerURL = makeTestServerURL(count: count)
-        let client = URLSessionHTTPClient()
-        let loader = RemoteFeedLoader(url: testServerURL, client: client)
-
-        let exp = expectation(description: "Wait for load completion")
-
-        var receivedResult: LoadFeedResult?
-        loader.load { result in
-            receivedResult = result
-            exp.fulfill()
-        }
-        wait(for: [exp], timeout: 5.0)
+        var receivedResult = getFeedResult(count: count)
 
         switch receivedResult {
         case let .success(items)?:
@@ -47,5 +36,22 @@ class DemoFeatureAPIEndToEndTests: XCTestCase {
         let baseURL = "mediastack.com"
         let testServerURL = URL(string: "http://api.\(baseURL)/v1/news?access_key=\(accessKey)&countries=\(countries)&languages=\(languages)&limit=\(limit)")!
         return testServerURL
+    }
+    
+    private func getFeedResult(count limit: Int) -> LoadFeedResult? {
+        let testServerURL = makeTestServerURL(count: limit)
+        let client = URLSessionHTTPClient()
+        let loader = RemoteFeedLoader(url: testServerURL, client: client)
+
+        let exp = expectation(description: "Wait for load completion")
+
+        var receivedResult: LoadFeedResult?
+        loader.load { result in
+            receivedResult = result
+            exp.fulfill()
+        }
+        wait(for: [exp], timeout: 5.0)
+
+        return receivedResult
     }
 }
