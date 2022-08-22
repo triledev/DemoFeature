@@ -10,6 +10,17 @@ import DemoFeature
 
 class DemoFeatureAPIEndToEndTests: XCTestCase {
 
+    func demo() {
+        let cache = URLCache(memoryCapacity: 10 * 1024 * 1024, diskCapacity: 100 * 1024 * 1024, directory: nil)
+        let configuration = URLSessionConfiguration.default
+        configuration.urlCache = cache
+        configuration.requestCachePolicy = .reloadIgnoringLocalCacheData
+        let session = URLSession(configuration: configuration)
+        let url = URL(string: "http://any-url")!
+        let request = URLRequest(url: url, cachePolicy: .returnCacheDataDontLoad, timeoutInterval: 30)
+        URLCache.shared =  cache
+    }
+
     func test_endToEndTestServerGETFeedResult_matchesFixedTestAccountData() {
         let count = 5
         let receivedResult = getFeedResult(count: count)
@@ -40,7 +51,7 @@ class DemoFeatureAPIEndToEndTests: XCTestCase {
 
     private func getFeedResult(count limit: Int, file: StaticString = #filePath, line: UInt = #line) -> LoadFeedResult? {
         let testServerURL = makeTestServerURL(count: limit)
-        let client = URLSessionHTTPClient()
+        let client = URLSessionHTTPClient(session: URLSession(configuration: .ephemeral))
         let loader = RemoteFeedLoader(url: testServerURL, client: client)
 
         trackForMemoryLeak(client, file: file, line: line)

@@ -27,7 +27,6 @@ struct Story: View {
     var body: some View {
         HStack(alignment: .top, spacing: 16.0) {
             Position(position: position)
-            
         }
     }
 }
