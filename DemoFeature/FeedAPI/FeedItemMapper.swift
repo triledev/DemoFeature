@@ -13,17 +13,35 @@ internal struct RemoteFeedItem: Decodable {
     internal let description: String?
     internal let url: URL?
     internal let source: String?
-    internal let image: URL?
+    internal let imageURL: URL?
     internal let category: String?
     internal let language: String?
     internal let country: String?
-    internal let published_at: String?
+    internal let publishedAt: String?
+
+    private enum CodingKeys: String, CodingKey {
+        case author = "author"
+        case title = "title"
+        case description = "description"
+        case url = "url"
+        case source = "source"
+        case imageURL = "image"
+        case category = "category"
+        case language = "language"
+        case country = "country"
+        case publishedAt = "published_at"
+    }
 }
 
 internal final class FeedItemsMapper {
     private struct Root: Decodable {
         let pagination: Pagination
         let items: [RemoteFeedItem]
+
+        private enum CodingKeys: String, CodingKey {
+            case pagination = "pagination"
+            case items = "data"
+        }
     }
 
     private static var OK_200: Int { return 200 }
