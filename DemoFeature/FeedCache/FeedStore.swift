@@ -25,7 +25,7 @@ public struct LocalFeedItem: Equatable {
     public let category: String?
     public let language: String?
     public let country: String?
-    public let published: String?
+    public let publishedAt: String?
 
     public init(
         author: String?,
@@ -37,7 +37,7 @@ public struct LocalFeedItem: Equatable {
         category: String?,
         language: String?,
         country: String?,
-        published: String?
+        publishedAt: String?
     ) {
         self.author = author
         self.title = title
@@ -48,6 +48,6 @@ public struct LocalFeedItem: Equatable {
         self.category = category
         self.language = language
         self.country = country
-        self.published = published
+        self.publishedAt = publishedAt
     }
 }

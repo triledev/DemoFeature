@@ -39,6 +39,6 @@ public final class LocalFeedLoader {
 
 private extension Array where Element == FeedItem {
     func toLocal() -> [LocalFeedItem] {
-        return map { LocalFeedItem(author: $0.author, title: $0.title, description: $0.description, url: $0.url, source: $0.source, imageURL: $0.imageURL, category: $0.category, language: $0.language, country: $0.country, published: $0.published)}
+        return map { LocalFeedItem(author: $0.author, title: $0.title, description: $0.description, url: $0.url, source: $0.source, imageURL: $0.imageURL, category: $0.category, language: $0.language, country: $0.country, publishedAt: $0.publishedAt)}
     }
 }

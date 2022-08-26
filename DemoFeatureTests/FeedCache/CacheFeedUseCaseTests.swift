@@ -168,12 +168,12 @@ class CacheFeedUseCaseTests: XCTestCase {
     }
 
     private func uniqueItem() -> FeedItem {
-        return FeedItem(author: "John Doe", title: "any", description: "any", url: anyURL(), source: "any", imageURL: anyURL(), category: "any", language: "en", country: "us", published: "any")
+        return FeedItem(author: "John Doe", title: "any", description: "any", url: anyURL(), source: "any", imageURL: anyURL(), category: "any", language: "en", country: "us", publishedAt: "any")
     }
 
     private func uniqueItems() -> (models: [FeedItem], local: [LocalFeedItem]) {
         let models = [uniqueItem(), uniqueItem()]
-        let local = models.map { LocalFeedItem(author: $0.author, title: $0.title, description: $0.description, url: $0.url, source: $0.source, imageURL: $0.imageURL, category: $0.category, language: $0.language, country: $0.country, published: $0.published) }
+        let local = models.map { LocalFeedItem(author: $0.author, title: $0.title, description: $0.description, url: $0.url, source: $0.source, imageURL: $0.imageURL, category: $0.category, language: $0.language, country: $0.country, publishedAt: $0.publishedAt) }
         return (models, local)
     }
     private func anyURL() -> URL {

@@ -43,7 +43,7 @@ class LoadFeedFromRemoteUseCaseTests: XCTestCase {
         let samples = [199, 201, 300, 400, 404, 416, 500]
         samples.enumerated().forEach { index, code in
             expect(sut, toCompleteWith: failure(.invalidData), when: {
-                let json = makeItemJSON([])
+                let json = makeItemsJSON([])
                 client.complete(withStatusCode: code, data: json, at: index)
             })
         }
@@ -60,7 +60,7 @@ class LoadFeedFromRemoteUseCaseTests: XCTestCase {
     func test_load_deliversNoItemsOn200HTTPResponseWithEmptyJSONList() {
         let (sut, client) = makeSUT()
         expect(sut, toCompleteWith: .success([]), when: {
-            let emptyListJSON = makeItemJSON([])
+            let emptyListJSON = makeItemsJSON([])
             client.complete(withStatusCode: 200, data: emptyListJSON)
         })
     }
@@ -80,7 +80,7 @@ class LoadFeedFromRemoteUseCaseTests: XCTestCase {
                 category: "general",
                 language: "en",
                 country: "us",
-                published: "2022-05-05T18:45:32+00:00"
+                publishedAt: "2022-05-05T18:45:32+00:00"
             )
 
         let item2 = makeItem(
@@ -93,14 +93,15 @@ class LoadFeedFromRemoteUseCaseTests: XCTestCase {
                 category: "general",
                 language: "en",
                 country: "us",
-                published: "2022-05-05T18:43:36+00:00"
+                publishedAt: "2022-05-05T18:43:36+00:00"
             )
 
         let items = [item1.model, item2.model]
 
         expect(sut, toCompleteWith: .success(items), when: {
-            // Another way of creating json data
+            // Another way of creating test json data
             // let json = feedJSON.data(using: .utf8)!
+
             let json = makeItemJSON([item1.json, item2.json])
             client.complete(withStatusCode: 200, data: json)
         })
@@ -115,7 +116,7 @@ class LoadFeedFromRemoteUseCaseTests: XCTestCase {
         sut?.load { capturedResults.append($0) }
 
         sut = nil
-        client.complete(withStatusCode: 200, data: makeItemJSON([]))
+        client.complete(withStatusCode: 200, data: makeItemsJSON([]))
         XCTAssertTrue(capturedResults.isEmpty)
     }
 
@@ -143,9 +144,9 @@ class LoadFeedFromRemoteUseCaseTests: XCTestCase {
         category: String?,
         language: String?,
         country: String?,
-        published: String?
+        publishedAt: String?
     ) -> (model: FeedItem, json: [String: Any]) {
-        let item = FeedItem(author: author, title: title, description: description, url: url, source: source, imageURL: imageURL, category: category, language: language, country: country, published: published)
+        let item = FeedItem(author: author, title: title, description: description, url: url, source: source, imageURL: imageURL, category: category, language: language, country: country, publishedAt: publishedAt)
         let json = [
             "author": author,
             "title": title,
@@ -156,14 +157,14 @@ class LoadFeedFromRemoteUseCaseTests: XCTestCase {
             "category": category,
             "language": language,
             "country": country,
-            "published_at": published
+            "published_at": publishedAt
         ].reduce(into: [String: Any]()) { (acc, e) in
             if let value = e.value { acc[e.key] = value }
         }
         return (item, json)
     }
 
-    private func makeItemJSON(_ items: [[String: Any]]) -> Data {
+    private func makeItemsJSON(_ items: [[String: Any]]) -> Data {
         let pagination = Pagination(limit: 25, offset: 0, count: 25, total: 10000)
         let paginationJSON = [
             "limit": pagination.limit,
