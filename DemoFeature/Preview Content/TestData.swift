@@ -7,11 +7,11 @@
 
 import Foundation
 
-struct TestData {
-    static let story: FeedItem = {
-        let url = Bundle.main.url(forResource: "Story", withExtension: "json")!
-        let data = try! Data(contentsOf: url)
-        let decoder = JSONDecoder()
-        return try! decoder.decode(FeedItem.self, from: data)
-    }()
-}
+//struct TestData {
+//    static let story: FeedItem = {
+//        let url = Bundle.main.url(forResource: "Story", withExtension: "json")!
+//        let data = try! Data(contentsOf: url)
+//        let decoder = JSONDecoder()
+//        return try! decoder.decode(FeedItem.self, from: data)
+//    }()
+//}

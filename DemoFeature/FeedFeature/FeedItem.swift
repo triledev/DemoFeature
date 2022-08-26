@@ -76,12 +76,12 @@ public struct FeedItem: Equatable {
     }
 }
 
-extension Feed: Decodable {
-    private enum CodingKeys: String, CodingKey {
-        case pagination
-        case data
-    }
-}
+//extension Feed: Decodable {
+//    private enum CodingKeys: String, CodingKey {
+//        case pagination
+//        case data
+//    }
+//}
 
 extension Pagination: Decodable {
     private enum CodingKeys: String, CodingKey {
@@ -92,17 +92,17 @@ extension Pagination: Decodable {
     }
 }
 
-extension FeedItem: Decodable {
-    private enum CodingKeys: String, CodingKey {
-        case author
-        case title
-        case description
-        case url
-        case source
-        case imageURL = "image"
-        case category
-        case language
-        case country
-        case publishedAt = "published_at"
-    }
-}
+//extension FeedItem: Decodable {
+//    private enum CodingKeys: String, CodingKey {
+//        case author
+//        case title
+//        case description
+//        case url
+//        case source
+//        case imageURL = "image"
+//        case category
+//        case language
+//        case country
+//        case publishedAt = "published_at"
+//    }
+//}

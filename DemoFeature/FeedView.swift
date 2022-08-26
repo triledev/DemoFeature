@@ -68,7 +68,7 @@ struct Badge: View {
 struct FeedView_Previews: PreviewProvider {
     static var previews: some View {
         Group {
-            Story(position: 1, item: TestData.story)
+//            Story(position: 1, item: TestData.story)
             Position(position: 1)
             Badge(text: "1.234", imageName: "paperplane")
         }
