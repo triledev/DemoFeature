@@ -102,7 +102,7 @@ class LoadFeedFromRemoteUseCaseTests: XCTestCase {
             // Another way of creating test json data
             // let json = feedJSON.data(using: .utf8)!
 
-            let json = makeItemJSON([item1.json, item2.json])
+            let json = makeItemsJSON([item1.json, item2.json])
             client.complete(withStatusCode: 200, data: json)
         })
     }
