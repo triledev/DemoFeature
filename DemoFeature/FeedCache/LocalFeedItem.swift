@@ -42,4 +42,4 @@ public struct LocalFeedItem: Equatable {
         self.country = country
         self.publishedAt = publishedAt
     }
-}`
+}
