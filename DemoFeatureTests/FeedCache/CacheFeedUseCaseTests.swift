@@ -135,6 +135,7 @@ class CacheFeedUseCaseTests: XCTestCase {
         let local = models.map { LocalFeedItem(author: $0.author, title: $0.title, description: $0.description, url: $0.url, source: $0.source, imageURL: $0.imageURL, category: $0.category, language: $0.language, country: $0.country, publishedAt: $0.publishedAt) }
         return (models, local)
     }
+
     private func anyURL() -> URL {
         return URL(string: "http://any-url.com")!
     }
