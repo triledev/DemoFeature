@@ -10,8 +10,42 @@ import DemoFeature
 
 class CodableFeedStore {
     private struct Cache: Codable {
-        let feed: [LocalFeedItem]
+        let feed: [CodableFeedItem]
         let timestamp: Date
+
+        var localFeed: [LocalFeedItem] {
+            return feed.map { $0.local }
+        }
+    }
+
+    private struct CodableFeedItem: Codable {
+        private let author: String?
+        private let title: String?
+        private let description: String?
+        private let url: URL?
+        private let source: String?
+        private let imageURL: URL?
+        private let category: String?
+        private let language: String?
+        private let country: String?
+        private let publishedAt: String?
+
+        init(_ item: LocalFeedItem) {
+            author = item.author
+            title = item.title
+            description = item.description
+            url = item.url
+            source = item.source
+            imageURL = item.imageURL
+            category = item.category
+            language = item.language
+            country = item.country
+            publishedAt = item.publishedAt
+        }
+
+        var local: LocalFeedItem {
+            return LocalFeedItem(author: author, title: title, description: description, url: url, source: source, imageURL: imageURL, category: category, language: language, country: country, publishedAt: publishedAt)
+        }
     }
 
     private let storeURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!.appendingPathComponent("item-feed.store")
@@ -23,12 +57,13 @@ class CodableFeedStore {
 
         let decoder = JSONDecoder()
         let cache = try! decoder.decode(Cache.self, from: data)
-        completion(.found(feed: cache.feed, timestamp: cache.timestamp))
+        completion(.found(feed: cache.localFeed, timestamp: cache.timestamp))
     }
 
     func insert(_ feed: [LocalFeedItem], timestamp: Date, completion: @escaping FeedStore.InsertionCompletion) {
         let encoder = JSONEncoder()
-        let encoded = try! encoder.encode(Cache(feed: feed, timestamp: timestamp))
+        let cache = Cache(feed: feed.map(CodableFeedItem.init), timestamp: timestamp)
+        let encoded = try! encoder.encode(cache)
         try! encoded.write(to: storeURL)
         completion(nil)
     }
