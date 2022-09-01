@@ -7,7 +7,7 @@
 
 import Foundation
 
-public struct LocalFeedItem: Equatable {
+public struct LocalFeedItem: Equatable, Codable {
     public let author: String?
     public let title: String?
     public let description: String?
