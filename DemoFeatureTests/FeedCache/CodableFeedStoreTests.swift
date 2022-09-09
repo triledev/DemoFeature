@@ -8,8 +8,6 @@
 import XCTest
 import DemoFeature
 
-
-
 class CodableFeedStoreTests: XCTestCase {
 
     override func setUp() {
@@ -76,14 +74,14 @@ class CodableFeedStoreTests: XCTestCase {
 
     func test_insert_overridesPreviouslyInsertedCacheValues() {
         let sut = makeSUT()
-        
+
         let firstInsertionError = insert((uniqueItemFeed().local, Date()), to: sut)
         XCTAssertNil(firstInsertionError, "Expected to insert cache successfully")
-        
+
         let latestFeed = uniqueItemFeed().local
         let latestTimestamp = Date()
         let latestInsertionError = insert((latestFeed, latestTimestamp), to: sut)
-        
+
         XCTAssertNil(latestInsertionError, "Expected to override cache successfully")
         expect(sut, toRetrieve: .found(feed: latestFeed, timestamp: latestTimestamp))
     }
@@ -111,9 +109,9 @@ class CodableFeedStoreTests: XCTestCase {
     func test_delete_emptiesPreviouslyInsertedCache() {
         let sut = makeSUT()
         insert((uniqueItemFeed().local, Date()), to: sut)
-        
+
         let deletionError = deleteCache(from: sut)
-        
+
         XCTAssertNil(deletionError, "Expected non-empty cache deletion to succeed")
         expect(sut, toRetrieve: .empty)
     }
@@ -121,9 +119,9 @@ class CodableFeedStoreTests: XCTestCase {
     func test_delete_deliversErrorOnDeletionError() {
         let noDeletePermissionURL = cachesDirectory()
         let sut = makeSUT(storeURL: noDeletePermissionURL)
-        
+
         let deletionError = deleteCache(from: sut)
-        
+
         XCTAssertNotNil(deletionError, "Expected cache deletion to fail")
     }
 
