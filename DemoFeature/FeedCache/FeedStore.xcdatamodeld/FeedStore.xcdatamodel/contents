@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="20086" systemVersion="21C52" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
-    <entity name="ManageCache" representedClassName="ManageCache" syncable="YES" codeGenerationType="class">
+    <entity name="ManageCache" representedClassName="ManageCache" syncable="YES">
         <attribute name="timestamp" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
-        <relationship name="feed" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="ManageFeedItem" inverseName="cache" inverseEntity="ManageFeedItem"/>
+        <relationship name="feed" toMany="YES" deletionRule="Cascade" ordered="YES" destinationEntity="ManageFeedItem" inverseName="cache" inverseEntity="ManageFeedItem"/>
     </entity>
-    <entity name="ManageFeedItem" representedClassName="ManageFeedItem" syncable="YES" codeGenerationType="class">
+    <entity name="ManageFeedItem" representedClassName="ManageFeedItem" syncable="YES">
         <attribute name="author" optional="YES" attributeType="String"/>
         <attribute name="category" optional="YES" attributeType="String"/>
         <attribute name="country" optional="YES" attributeType="String"/>
