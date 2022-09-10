@@ -14,7 +14,7 @@ internal class ManagedCache: NSManagedObject {
 }
 
 @objc(ManagedFeedImage)
-internal class ManageFeedImage: NSManagedObject {
+internal class ManageFeedItem: NSManagedObject {
     @NSManaged internal var author: String?
     @NSManaged internal var title: String?
     @NSManaged internal var itemDescription: String?
