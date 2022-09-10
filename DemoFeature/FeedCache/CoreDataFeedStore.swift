@@ -5,12 +5,20 @@
 //  Created by Tri Le on 9/9/22.
 //
 
-import Foundation
+import CoreData
 
 public final class CoreDataFeedStore: FeedStore {
-    public init() {}
+    private let container: NSPersistentContainer
+
+    public init(bundle: Bundle = .main) throws {
+        container = try NSPersistentContainer.load(modelName: "FeedStore", in: bundle)
+    }
 
     public func deleteCacheFeed(completion: @escaping DeletionCompletion) {
+
+    }
+
+    public func insert(_ feed: [LocalFeedItem], timestamp: Date, completion: @escaping InsertionCompletion) {
 
     }
 
@@ -18,7 +26,51 @@ public final class CoreDataFeedStore: FeedStore {
         completion(.empty)
     }
 
-    public func insert(_ feed: [LocalFeedItem], timestamp: Date, completion: @escaping InsertionCompletion) {
+}
 
+private extension NSPersistentContainer {
+    enum LoadingError: Swift.Error {
+        case modelNotFound
+        case failedToLoadPersistentStores(Swift.Error)
     }
+    
+    static func load(modelName name: String, in bundle: Bundle) throws -> NSPersistentContainer {
+        guard let model = NSManagedObjectModel.with(name: name, in: bundle) else {
+            throw LoadingError.modelNotFound
+        }
+
+        let container = NSPersistentContainer(name: name, managedObjectModel: model)
+        var loadError: Swift.Error?
+        container.loadPersistentStores { loadError = $1 }
+        try loadError.map { throw LoadingError.failedToLoadPersistentStores($0) }
+
+        return container
+    }
+}
+
+private extension NSManagedObjectModel {
+    static func with(name: String, in bundle: Bundle) -> NSManagedObjectModel? {
+        return bundle
+            .url(forResource: name, withExtension: "momd")
+            .flatMap { NSManagedObjectModel(contentsOf: $0) }
+    }
+}
+
+private class ManagedCache: NSManagedObject {
+    @NSManaged var timestamp: Date
+    @NSManaged var feed: NSOrderedSet
+}
+
+private class ManageFeedItem: NSManagedObject {
+    @NSManaged var author: String?
+    @NSManaged var title: String?
+    @NSManaged var itemDescription: String?
+    @NSManaged var url: URL?
+    @NSManaged var source: String?
+    @NSManaged var image: URL?
+    @NSManaged var category: String?
+    @NSManaged var language: String?
+    @NSManaged var country: String?
+    @NSManaged var publishedAt: String?
+    @NSManaged var cache: ManagedCache
 }
