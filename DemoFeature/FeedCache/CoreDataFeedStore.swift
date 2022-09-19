@@ -9,9 +9,11 @@ import CoreData
 
 public final class CoreDataFeedStore: FeedStore {
     private let container: NSPersistentContainer
+    private let context: NSManagedObjectContext
 
     public init(bundle: Bundle = .main) throws {
         container = try NSPersistentContainer.load(modelName: "FeedStore", in: bundle)
+        context = container.newBackgroundContext()
     }
 
     public func deleteCacheFeed(completion: @escaping DeletionCompletion) {
@@ -61,7 +63,7 @@ private class ManagedCache: NSManagedObject {
     @NSManaged var feed: NSOrderedSet
 }
 
-private class ManageFeedItem: NSManagedObject {
+private class ManagedFeedItem: NSManagedObject {
     @NSManaged var author: String?
     @NSManaged var title: String?
     @NSManaged var itemDescription: String?
