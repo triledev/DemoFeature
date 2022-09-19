@@ -26,20 +26,7 @@ public final class CoreDataFeedStore: FeedStore {
             do {
                 let managedCache = ManagedCache(context: context)
                 managedCache.timestamp = timestamp
-                managedCache.feed = NSOrderedSet(array: feed.map { local in
-                    let managed = ManagedFeedItem(context: context)
-                    managed.author = local.author
-                    managed.title = local.title
-                    managed.itemDescription = local.description
-                    managed.url = local.url
-                    managed.source = local.source
-                    managed.imageURL = local.imageURL
-                    managed.category = local.category
-                    managed.language = local.language
-                    managed.country = local.country
-                    managed.publishedAt = local.publishedAt
-                    return managed
-                })
+                managedCache.feed = ManagedFeedItem.items(from: feed, in: context)
 
                 try context.save()
                 completion(nil)
@@ -56,13 +43,7 @@ public final class CoreDataFeedStore: FeedStore {
                 let request = NSFetchRequest<ManagedCache>(entityName: ManagedCache.entity().name!)
                 request.returnsObjectsAsFaults = false
                 if let cache = try context.fetch(request).first {
-                    completion(.found(
-                        feed: cache.feed
-                                .compactMap { ($0 as? ManagedFeedItem)}
-                                .map {
-                                    LocalFeedItem(author: $0.author, title: $0.title, description: $0.itemDescription, url: $0.url, source: $0.source, imageURL: $0.imageURL, category: $0.category, language: $0.language, country: $0.country, publishedAt: $0.publishedAt)
-                                },
-                        timestamp: cache.timestamp))
+                    completion(.found(feed: cache.localFeed, timestamp: cache.timestamp))
                 } else {
                     completion(.empty)
                 }
@@ -108,6 +89,10 @@ private extension NSManagedObjectModel {
 private class ManagedCache: NSManagedObject {
     @NSManaged var timestamp: Date
     @NSManaged var feed: NSOrderedSet
+
+    var localFeed: [LocalFeedItem] {
+        return feed.compactMap { ($0 as? ManagedFeedItem)?.local }
+    }
 }
 
 @objc(ManagedFeedItem)
@@ -123,4 +108,25 @@ private class ManagedFeedItem: NSManagedObject {
     @NSManaged var country: String?
     @NSManaged var publishedAt: String?
     @NSManaged var cache: ManagedCache
+
+    static func items(from localFeed: [LocalFeedItem], in context: NSManagedObjectContext) -> NSOrderedSet {
+        return NSOrderedSet(array: localFeed.map { local in
+            let managed = ManagedFeedItem(context: context)
+            managed.author = local.author
+            managed.title = local.title
+            managed.itemDescription = local.description
+            managed.url = local.url
+            managed.source = local.source
+            managed.imageURL = local.imageURL
+            managed.category = local.category
+            managed.language = local.language
+            managed.country = local.country
+            managed.publishedAt = local.publishedAt
+            return managed
+        })
+    }
+
+    var local: LocalFeedItem {
+        return LocalFeedItem(author: author, title: title, description: itemDescription, url: url, source: source, imageURL: imageURL, category: category, language: language, country: country, publishedAt: publishedAt)
+    }
 }
