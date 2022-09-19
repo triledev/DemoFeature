@@ -33,7 +33,7 @@ public final class CoreDataFeedStore: FeedStore {
                     managed.itemDescription = local.description
                     managed.url = local.url
                     managed.source = local.source
-                    managed.image = local.imageURL
+                    managed.imageURL = local.imageURL
                     managed.category = local.category
                     managed.language = local.language
                     managed.country = local.country
@@ -60,7 +60,7 @@ public final class CoreDataFeedStore: FeedStore {
                         feed: cache.feed
                                 .compactMap { ($0 as? ManagedFeedItem)}
                                 .map {
-                                    LocalFeedItem(author: $0.author, title: $0.title, description: $0.itemDescription, url: $0.url, source: $0.source, imageURL: $0.image, category: $0.category, language: $0.language, country: $0.country, publishedAt: $0.publishedAt)
+                                    LocalFeedItem(author: $0.author, title: $0.title, description: $0.itemDescription, url: $0.url, source: $0.source, imageURL: $0.imageURL, category: $0.category, language: $0.language, country: $0.country, publishedAt: $0.publishedAt)
                                 },
                         timestamp: cache.timestamp))
                 } else {
@@ -117,7 +117,7 @@ private class ManagedFeedItem: NSManagedObject {
     @NSManaged var itemDescription: String?
     @NSManaged var url: URL?
     @NSManaged var source: String?
-    @NSManaged var image: URL?
+    @NSManaged var imageURL: URL?
     @NSManaged var category: String?
     @NSManaged var language: String?
     @NSManaged var country: String?

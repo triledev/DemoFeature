@@ -8,7 +8,7 @@
         <attribute name="author" optional="YES" attributeType="String"/>
         <attribute name="category" optional="YES" attributeType="String"/>
         <attribute name="country" optional="YES" attributeType="String"/>
-        <attribute name="image" optional="YES" attributeType="URI"/>
+        <attribute name="imageURL" optional="YES" attributeType="URI"/>
         <attribute name="itemDescription" optional="YES" attributeType="String"/>
         <attribute name="language" optional="YES" attributeType="String"/>
         <attribute name="publishedAt" optional="YES" attributeType="String"/>
