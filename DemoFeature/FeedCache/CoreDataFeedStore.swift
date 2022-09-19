@@ -60,7 +60,7 @@ public final class CoreDataFeedStore: FeedStore {
                         feed: cache.feed
                                 .compactMap { ($0 as? ManagedFeedItem)}
                                 .map {
-                                    LocalFeedItem(author: $0.author, title: $0.title, description: $0.description, url: $0.url, source: $0.source, imageURL: $0.imageURL, category: $0.category, language: $0.language, country: $0.country, publishedAt: $0.publishedAt)
+                                    LocalFeedItem(author: $0.author, title: $0.title, description: $0.itemDescription, url: $0.url, source: $0.source, imageURL: $0.image, category: $0.category, language: $0.language, country: $0.country, publishedAt: $0.publishedAt)
                                 },
                         timestamp: cache.timestamp))
                 } else {
