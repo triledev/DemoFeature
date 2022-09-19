@@ -21,13 +21,56 @@ public final class CoreDataFeedStore: FeedStore {
     }
 
     public func insert(_ feed: [LocalFeedItem], timestamp: Date, completion: @escaping InsertionCompletion) {
+        let context = self.context
+        context.perform {
+            do {
+                let managedCache = ManagedCache(context: context)
+                managedCache.timestamp = timestamp
+                managedCache.feed = NSOrderedSet(array: feed.map { local in
+                    let managed = ManagedFeedItem(context: context)
+                    managed.author = local.author
+                    managed.title = local.title
+                    managed.itemDescription = local.description
+                    managed.url = local.url
+                    managed.source = local.source
+                    managed.image = local.imageURL
+                    managed.category = local.category
+                    managed.language = local.language
+                    managed.country = local.country
+                    managed.publishedAt = local.publishedAt
+                    return managed
+                })
 
+                try context.save()
+                completion(nil)
+            } catch {
+                completion(error)
+            }
+        }
     }
 
     public func retrieve(completion: @escaping RetrievalCompletion) {
-        completion(.empty)
+        let context = self.context
+        context.perform {
+            do {
+                let request = NSFetchRequest<ManagedCache>(entityName: ManagedCache.entity().name!)
+                request.returnsObjectsAsFaults = false
+                if let cache = try context.fetch(request).first {
+                    completion(.found(
+                        feed: cache.feed
+                                .compactMap { ($0 as? ManagedFeedItem)}
+                                .map {
+                                    LocalFeedItem(author: $0.author, title: $0.title, description: $0.description, url: $0.url, source: $0.source, imageURL: $0.imageURL, category: $0.category, language: $0.language, country: $0.country, publishedAt: $0.publishedAt)
+                                },
+                        timestamp: cache.timestamp))
+                } else {
+                    completion(.empty)
+                }
+            } catch {
+                completion(.failure(error))
+            }
+        }
     }
-
 }
 
 private extension NSPersistentContainer {
@@ -61,11 +104,13 @@ private extension NSManagedObjectModel {
     }
 }
 
+@objc(ManagedCache)
 private class ManagedCache: NSManagedObject {
     @NSManaged var timestamp: Date
     @NSManaged var feed: NSOrderedSet
 }
 
+@objc(ManagedFeedItem)
 private class ManagedFeedItem: NSManagedObject {
     @NSManaged var author: String?
     @NSManaged var title: String?
