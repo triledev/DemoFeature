@@ -98,7 +98,7 @@ extension FeedStoreSpecs where Self: XCTestCase {
         }
 
         let op2 = expectation(description: "Operation 2")
-        sut.deleteCacheFeed { _ in
+        sut.deleteCachedFeed { _ in
             completedOperationsInOrder.append(op2)
             op2.fulfill()
         }
@@ -131,7 +131,7 @@ extension FeedStoreSpecs where Self: XCTestCase {
     func deleteCache(from sut: FeedStore) -> Error? {
         let exp = expectation(description: "Wait for cache deletion")
         var deletionError: Error?
-        sut.deleteCacheFeed { receivedDeletionError in
+        sut.deleteCachedFeed { receivedDeletionError in
             deletionError = receivedDeletionError
             exp.fulfill()
         }
