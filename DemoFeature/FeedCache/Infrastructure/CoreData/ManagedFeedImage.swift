@@ -21,7 +21,13 @@ internal class ManagedFeedItem: NSManagedObject {
     @NSManaged var publishedAt: String?
     @NSManaged var cache: ManagedCache
 
-    static func items(from localFeed: [LocalFeedItem], in context: NSManagedObjectContext) -> NSOrderedSet {
+    var local: LocalFeedItem {
+        return LocalFeedItem(author: author, title: title, description: itemDescription, url: url, source: source, imageURL: imageURL, category: category, language: language, country: country, publishedAt: publishedAt)
+    }
+}
+
+extension ManagedFeedItem {
+    internal static func items(from localFeed: [LocalFeedItem], in context: NSManagedObjectContext) -> NSOrderedSet {
         return NSOrderedSet(array: localFeed.map { local in
             let managed = ManagedFeedItem(context: context)
             managed.author = local.author
@@ -36,9 +42,5 @@ internal class ManagedFeedItem: NSManagedObject {
             managed.publishedAt = local.publishedAt
             return managed
         })
-    }
-
-    var local: LocalFeedItem {
-        return LocalFeedItem(author: author, title: title, description: itemDescription, url: url, source: source, imageURL: imageURL, category: category, language: language, country: country, publishedAt: publishedAt)
     }
 }
