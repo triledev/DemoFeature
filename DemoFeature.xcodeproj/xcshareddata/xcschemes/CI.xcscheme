@@ -51,6 +51,16 @@
                ReferencedContainer = "container:DemoFeature.xcodeproj">
             </BuildableReference>
          </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "F45B335B28DA5CED0040CF08"
+               BuildableName = "DemoFeatureCacheIntegrationTests.xctest"
+               BlueprintName = "DemoFeatureCacheIntegrationTests"
+               ReferencedContainer = "container:DemoFeature.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
    </TestAction>
    <LaunchAction
