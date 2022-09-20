@@ -92,7 +92,19 @@ class DemoFeatureCacheIntegrationTests: XCTestCase {
         return cachesDirectory().appendingPathComponent("\(type(of: self)).store")
     }
 
+    /*
+     .userDomainMask work for macOS framework target.
+     The cache directory permission is different in the iOS simulator
+     (you can delete the directory on the simulator, but not on the macOS target!)
+     */
     private func cachesDirectory() -> URL {
         return FileManager.default.urls(for: .cachesDirectory, in: .userDomainMask).first!
+    }
+
+    /*
+     .systemDomainMask work for iOS app target.
+     */
+    private func noDeletePermissionURL() -> URL {
+      return FileManager.default.urls(for: .cachesDirectory, in: .systemDomainMask).first!
     }
 }
