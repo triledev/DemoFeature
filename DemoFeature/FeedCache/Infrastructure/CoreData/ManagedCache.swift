@@ -7,23 +7,23 @@
 
 import CoreData
 
-//@objc(ManageCache)
-//internal class ManagedCache: NSManagedObject {
-//    @NSManaged internal var timestamp: Date
-//    @NSManaged internal var feed: NSOrderedSet
-//}
-//
-//@objc(ManagedFeedImage)
-//internal class ManageFeedItem: NSManagedObject {
-//    @NSManaged internal var author: String?
-//    @NSManaged internal var title: String?
-//    @NSManaged internal var itemDescription: String?
-//    @NSManaged internal var url: URL?
-//    @NSManaged internal var source: String?
-//    @NSManaged internal var image: URL?
-//    @NSManaged internal var category: String?
-//    @NSManaged internal var language: String?
-//    @NSManaged internal var country: String?
-//    @NSManaged internal var publishedAt: String?
-//    @NSManaged internal var cache: ManagedCache
-//}
+@objc(ManagedCache)
+internal class ManagedCache: NSManagedObject {
+    @NSManaged var timestamp: Date
+    @NSManaged var feed: NSOrderedSet
+
+    static func find(in context: NSManagedObjectContext) throws -> ManagedCache? {
+        let request = NSFetchRequest<ManagedCache>(entityName: ManagedCache.entity().name!)
+        request.returnsObjectsAsFaults = false
+        return try context.fetch(request).first
+    }
+
+    static func newUniqueInstance(in context: NSManagedObjectContext) throws -> ManagedCache {
+        try find(in: context).map(context.delete)
+        return ManagedCache(context: context)
+    }
+
+    var localFeed: [LocalFeedItem] {
+        return feed.compactMap { ($0 as? ManagedFeedItem)?.local }
+    }
+}
