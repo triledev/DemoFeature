@@ -62,6 +62,7 @@ class DemoFeatureCacheIntegrationTests: XCTestCase {
 
             loadExp.fulfill()
         }
+        wait(for: [loadExp], timeout: 1.0)
     }
 
     // MARK: - Helpers
