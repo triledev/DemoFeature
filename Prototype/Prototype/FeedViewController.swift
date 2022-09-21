@@ -14,11 +14,28 @@ struct FeedItemViewModel {
 }
 
 final class FeedViewController: UITableViewController {
+    private let feed = FeedItemViewModel.prototypeFeed
+
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
+        return feed.count
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        return tableView.dequeueReusableCell(withIdentifier: "FeedItemCell")!
+        let cell = tableView.dequeueReusableCell(withIdentifier: "FeedItemCell", for: indexPath) as! FeedItemCell
+        let model = feed[indexPath.row]
+        cell.configure(with: model)
+        return cell
+    }
+}
+
+extension FeedItemCell {
+    func configure(with model: FeedItemViewModel) {
+        locationLabel.text = model.location
+        locationContainer.isHidden = model.location == nil
+
+        descriptionLabel.text = model.description
+        descriptionLabel.isHidden = model.description == nil
+
+        feedItemView.image = UIImage(named: model.imageName)
     }
 }
